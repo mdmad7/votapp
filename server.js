@@ -2,10 +2,13 @@ import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import passport from 'passport';
 
+import passportConfig from './passport';
 import user from './routes/user';
 
 const server = express();
+server.use(passport.initialize());
 const PORT = 4000;
 
 // Set up mongoose connection
