@@ -33,6 +33,14 @@ const UserSchema = new Schema(
       enum: ['Administrator', 'Voter', 'Manager'],
       default: 'Voter',
     },
+    hasVoted: {
+      type: Boolean,
+      default: false,
+    },
+    hasDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

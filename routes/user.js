@@ -5,11 +5,7 @@ import passportConfig from '../passport';
 
 const router = Router();
 
-router.get(
-  '/users',
-  passport.authenticate('jwt', { session: false }),
-  userController.allUsers,
-);
+router.get('/users', passport.authenticate('jwt', { session: false }), userController.allUsers);
 
 router.get(
   '/user/:id',
@@ -17,9 +13,13 @@ router.get(
   userController.userProfile,
 );
 
-router.post('/user', userController.createUser);
+router.post(
+  '/user/signup',
+  passport.authenticate('jwt', { session: false }),
+  userController.createUser,
+);
 
-router.post('/user/logIn', userController.logIn);
+router.post('/user/login', userController.logIn);
 
 router.put(
   '/user/:id',
@@ -27,10 +27,16 @@ router.put(
   userController.updateUser,
 );
 
-router.delete(
-  '/user/:id',
+// router.delete(
+//   '/user/:id',
+//   passport.authenticate('jwt', { session: false }),
+//   userController.deleteUser,
+// );
+
+router.patch(
+  '/user/:id/delete',
   passport.authenticate('jwt', { session: false }),
-  userController.deleteUser,
+  userController.userDelete,
 );
 
 export default router;
